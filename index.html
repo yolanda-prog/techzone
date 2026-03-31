@@ -50,7 +50,7 @@
 
     .page-inner {
       width: 100%;
-      max-width: none;
+      max-width: 960px;
       margin: 0 auto;
       background: #fff;
       min-height: calc(100vh - 36px);
@@ -62,9 +62,7 @@
     .hidden { display: none !important; }
 
     .top-blue {
-      height: 12px;
-      background: var(--brand-blue);
-      width: 100%;
+      display: none;
     }
 
     .browser-strip {
@@ -115,8 +113,25 @@
       border: 1px solid #d7d7d7;
       border-radius: 18px;
       padding: 8px 14px;
-      font-size: 0.98rem;
-      color: #666;
+      font-size: 1.08rem;
+      color: #444;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .address-lock {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .address-text {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -270,8 +285,8 @@
 
     .small-card p {
       margin: 0;
-      font-size: 0.95rem;
-      color: #444;
+      font-size: 1.08rem;
+      color: #333;
       font-weight: 700;
     }
 
@@ -287,7 +302,7 @@
       background: var(--brand-dark);
       color: #fff;
       text-align: center;
-      font-size: 0.76rem;
+      font-size: 0.95rem;
       line-height: 1.2;
       padding: 8px 4px;
       min-height: 44px;
@@ -345,27 +360,28 @@
 
     .field-label {
       display: block;
-      font-size: 1.08rem;
+      font-size: 1.22rem;
       font-weight: 700;
       margin: 14px 0 8px;
     }
 
     .field-input {
       width: 100%;
-      height: 50px;
-      border: 2px solid #222;
+      height: 52px;
+      border: 1.5px solid #9a9a9a;
       border-radius: 4px;
-      padding: 0 12px;
-      font-size: 1.05rem;
+      padding: 0 14px;
+      font-size: 1.18rem;
       background: #fff;
       font-family: inherit;
+      color: #222;
     }
 
     .primary-btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      margin: 22px 0 0;
+      margin: 22px auto 0;
       min-width: 230px;
       height: 46px;
       border: none;
@@ -395,7 +411,7 @@
       align-items: center;
       gap: 8px;
       margin-top: 10px;
-      font-size: 1rem;
+      font-size: 1.08rem;
       color: #333;
       font-weight: 700;
     }
@@ -458,8 +474,8 @@
     }
 
     .notify-title {
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 1.08rem;
+      font-weight: 800;
       color: #222;
       overflow: hidden;
       white-space: nowrap;
@@ -468,7 +484,7 @@
     }
 
     .notify-text {
-      font-size: 0.92rem;
+      font-size: 1rem;
       color: #555;
       line-height: 1.35;
       overflow: hidden;
@@ -505,7 +521,7 @@
     }
 
     .small-note {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #555;
       line-height: 1.45;
     }
@@ -523,24 +539,35 @@
       justify-content: flex-end;
       align-items: center;
       gap: 8px;
-      font-size: 1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: #555;
       padding: 12px 12px 0;
     }
 
     .welcome-box {
-      background: #ffffff;
-      border: 1px solid #dddddd;
-      border-radius: 8px;
-      padding: 20px 16px;
-      text-align: center;
-      margin: 12px 12px 0;
+      display: none;
     }
 
     .welcome-banner {
       padding: 16px 14px 8px;
       background: var(--light-grey);
+    }
+
+    .hero-centered .hero-text {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 80%;
+      width: 80%;
+      text-align: center;
+    }
+
+    .hero-centered .shop-btn {
+      margin: 0 auto;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .popular-title {
@@ -679,7 +706,7 @@
       }
 
       .browser-address {
-        font-size: 0.86rem;
+        font-size: 1rem;
         padding: 7px 10px;
       }
 
@@ -753,7 +780,7 @@
       .field-label,
       .field-input,
       .feedback {
-        font-size: 0.94rem;
+        font-size: 1rem;
       }
 
       .login-content {
@@ -810,7 +837,7 @@
             <button class="browser-btn" id="backBtn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" id="forwardBtn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address">techzone.com.au</div>
+          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au</span></div>
         </div>
 
         <div class="nav-bar">
@@ -845,7 +872,7 @@
 
         <div class="search-bar-wrap">
           <input class="search-box" type="text" value="Search techzone.com.au" readonly>
-          <div class="search-icon-box" onclick="showHelper('Search', 'Not quite. This is the search button. Tap here to look for products on the website.')">
+          <div class="search-icon-box" onclick="showHelper('Search', 'This is the search button. Tap here to look for products on the website.')">
             <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="10" cy="10" r="6.5" fill="none" stroke="#ffffff" stroke-width="2.5"/>
               <line x1="15" y1="15" x2="21" y2="21" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
@@ -898,7 +925,7 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address">techzone.com.au/signin</div>
+          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/signin</span></div>
         </div>
 
         <div class="login-header">TechZone</div>
@@ -925,7 +952,7 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address">techzone.com.au/new-account</div>
+          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/new-account</span></div>
         </div>
 
         <div class="login-header">TechZone</div>
@@ -950,7 +977,7 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address">techzone.com.au/create-account</div>
+          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/create-account</span></div>
         </div>
 
         <div class="login-header">TechZone</div>
@@ -989,7 +1016,7 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address">techzone.com.au/verify-email</div>
+          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/verify-email</span></div>
         </div>
 
         <div class="fake-notification">
@@ -1000,8 +1027,7 @@
                 <strong>TechZone</strong>
                 <span class="notify-time">now</span>
               </div>
-              <div class="notify-title">Your verification code is ready</div>
-              <div class="notify-text">Use code <span id="displayCodeInlineShort">483921</span> to verify your email.</div>
+              <div class="notify-title"><strong>TechZone <span id="displayCodeInlineShort">483921</span> is the code to verify your email.</strong></div>
             </div>
           </div>
         </div>
@@ -1039,7 +1065,7 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address">techzone.com.au/home</div>
+          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/home</span></div>
         </div>
 
         <div class="nav-bar">
@@ -1084,15 +1110,10 @@
 
         <div class="welcome-top">Welcome to your account</div>
 
-        <div class="welcome-box">
-          <h2 style="margin:0 0 10px; font-size: 2rem; color:#333;">You're in!</h2>
-          <p class="small-note" style="margin:0;">Your TechZone account is ready. Start browsing today's popular products.</p>
-        </div>
-
         <div class="welcome-banner">
-          <div class="hero" style="min-height: 210px; border-radius: 8px;">
-            <div class="hero-text" style="top:34px;">
-              <h1 style="font-size: clamp(1.7rem, 2.8vw, 2.35rem);">Welcome to<br>TechZone</h1>
+          <div class="hero hero-centered" style="min-height: 210px; border-radius: 8px;">
+            <div class="hero-text">
+              <h1 style="font-size: clamp(1.9rem, 3vw, 2.5rem);">Welcome to<br>TechZone</h1>
               <button class="shop-btn">Shop now</button>
             </div>
             <img src="hero-headphones.png" alt="Headphones product image" onerror="this.style.display='none'">
