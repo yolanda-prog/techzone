@@ -184,6 +184,7 @@ display: block;
       justify-content: center;
       align-items: center;
       gap: 8px;
+      max-width: 1200px;
     }
 
     .search-box {
@@ -195,6 +196,7 @@ display: block;
       font-size: 1rem;
       color: #555;
       font-family: inherit;
+      width: min(1080px, calc(100vw - 90px))
     }
 
     .search-icon-box {
@@ -210,10 +212,12 @@ display: block;
 
     .hero {
       position: relative;
-      width: 100%;
+      width: min(1200px, calc(100% - 24px));
+      margin: 0 auto;
       min-height: 270px;
       background: linear-gradient(90deg, #0052c8 0%, #1677dd 58%, #7fc0f2 100%);
       overflow: hidden;
+      border-radius: 0;
     }
 
     .hero::before {
@@ -265,6 +269,8 @@ display: block;
     }
 
     .cards-row {
+        width: min(1200px, calc(100% - 12px));
+  margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
@@ -300,6 +306,8 @@ display: block;
     }
 
     .info-row {
+        width: min(1200px, calc(100% - 12px));
+  margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
