@@ -6,56 +6,129 @@
   <title>TechZone</title>
   <style>
     * { box-sizing: border-box; }
-    body {
+
+    :root {
+      --brand-blue: #2349c7;
+      --brand-dark: #0f56b3;
+      --text-grey: #5d5d5d;
+      --light-grey: #efefef;
+      --page-grey: #e9e9e9;
+      --border-grey: #d9d9d9;
+    }
+
+    html, body {
       margin: 0;
+      padding: 0;
+      min-height: 100%;
       font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-      background: #e9e9e9;
+      background: var(--page-grey);
       color: #222;
     }
 
-    .app-shell {
-      min-height: 100vh;
+    body {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 16px;
     }
 
-    .page {
+    .app-shell {
       width: 100%;
-      max-width: 1000px;
-      min-height: min(100vh - 32px, 980px);
-      background: #ffffff;
-      position: relative;
+      max-width: 1200px;
+      min-height: 100vh;
+      padding: 18px;
+    }
+
+    .screen {
+      width: 100%;
+      min-height: calc(100vh - 36px);
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+      position: relative;
     }
 
-    .phone-frame {
+    .page-inner {
       width: 100%;
-      max-width: 430px;
-      min-height: min(100vh - 32px, 920px);
+      max-width: 960px;
       margin: 0 auto;
-      background: #ffffff;
+      background: #fff;
+      min-height: calc(100vh - 36px);
       position: relative;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .hidden { display: none !important; }
 
     .top-blue {
-      background: #2349c7;
-      height: 10px;
+      height: 12px;
+      background: var(--brand-blue);
       width: 100%;
+    }
+
+    .browser-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #f5f5f5;
+      border-bottom: 1px solid #dfdfdf;
+      position: sticky;
+      top: 0;
+      z-index: 25;
+    }
+
+    .browser-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 90px;
+    }
+
+    .browser-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #d7d7d7;
+      background: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #666;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .browser-btn:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    .browser-address {
+      flex: 1;
+      min-width: 0;
+      background: #fff;
+      border: 1px solid #d7d7d7;
+      border-radius: 18px;
+      padding: 8px 14px;
+      font-size: 0.98rem;
+      color: #666;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     .nav-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #ffffff;
+      background: #fff;
       padding: 12px 14px;
-      border-bottom: 1px solid #d9d9d9;
+      border-bottom: 1px solid var(--border-grey);
     }
 
     .nav-left, .nav-right {
@@ -65,15 +138,15 @@
     }
 
     .logo {
-      font-size: clamp(1.9rem, 2vw, 2.2rem);
+      font-size: clamp(1.9rem, 2.3vw, 2.2rem);
       font-weight: 700;
-      color: #0f56b3;
-      letter-spacing: -0.5px;
+      color: var(--brand-dark);
+      letter-spacing: -0.4px;
     }
 
     .sign-in-link {
-      color: #5d5d5d;
-      font-size: 1.2rem;
+      color: var(--text-grey);
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
       font-weight: 700;
       text-decoration: none;
       cursor: pointer;
@@ -87,7 +160,7 @@
     }
 
     .search-bar-wrap {
-      background: #2349c7;
+      background: var(--brand-blue);
       padding: 14px 14px 16px;
       display: flex;
       justify-content: center;
@@ -97,64 +170,76 @@
 
     .search-box {
       flex: 1;
-      background: #ffffff;
+      background: #fff;
       border: none;
-      height: 40px;
+      height: 42px;
       padding: 0 12px;
       font-size: 1rem;
       color: #555;
+      font-family: inherit;
     }
 
     .search-icon-box {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
+      color: #fff;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     .hero {
       position: relative;
       width: 100%;
-      height: 230px;
+      min-height: 270px;
       background: linear-gradient(90deg, #0052c8 0%, #1677dd 58%, #7fc0f2 100%);
       overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 25% 35%, rgba(255,255,255,0.22), transparent 32%);
+      pointer-events: none;
     }
 
     .hero-text {
       position: absolute;
       left: 18px;
-      top: 50px;
+      top: 42px;
       z-index: 2;
-      color: #ffffff;
-      max-width: 52%;
+      color: #fff;
+      max-width: 50%;
     }
 
     .hero-text h1 {
-      margin: 0 0 16px;
-      font-size: clamp(2rem, 3vw, 2.35rem);
-      line-height: 1.15;
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      line-height: 1.14;
       font-weight: 800;
     }
 
     .shop-btn {
       border: none;
-      background: #ffffff;
-      color: #0f56b3;
+      background: #fff;
+      color: var(--brand-dark);
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
       padding: 10px 18px;
       cursor: pointer;
       border-radius: 2px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      font-family: inherit;
     }
 
     .hero img {
       position: absolute;
-      right: 8px;
+      right: 10px;
       top: 20px;
-      width: 190px;
+      width: min(32vw, 280px);
       max-width: 48%;
       z-index: 1;
     }
@@ -164,16 +249,16 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       padding: 12px 10px 0;
-      background: #efefef;
+      background: var(--light-grey);
     }
 
     .small-card {
-      background: #ffffff;
+      background: #fff;
       border: 1px solid #dddddd;
       border-radius: 4px;
       text-align: center;
-      padding: 8px 4px 8px;
-      min-height: 82px;
+      padding: 8px 4px;
+      min-height: 86px;
     }
 
     .small-card img {
@@ -195,14 +280,14 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       padding: 10px 10px 14px;
-      background: #efefef;
+      background: var(--light-grey);
     }
 
     .info-card {
-      background: #0f56b3;
-      color: #ffffff;
+      background: var(--brand-dark);
+      color: #fff;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       line-height: 1.2;
       padding: 8px 4px;
       min-height: 44px;
@@ -210,80 +295,94 @@
       font-weight: 700;
     }
 
+    .page-end {
+      margin-top: auto;
+      background: var(--light-grey);
+    }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #666;
+      padding: 16px 18px 18px;
+      background: var(--light-grey);
+      border-top: 1px solid #e3e3e3;
+    }
+
     .login-page {
-      width: 100%;
-      max-width: 1000px;
-      min-height: min(100vh - 32px, 980px);
       background: #f3f3f3;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.12);
-    }
-
-    .login-phone {
-      width: 100%;
-      max-width: 430px;
-      min-height: min(100vh - 32px, 920px);
-      margin: 0 auto;
-      background: #f3f3f3;
-      position: relative;
-    }
-
-    .login-header {
-      background: #2349c7;
-      color: #ffffff;
-      font-size: 2rem;
-      font-weight: 700;
-      padding: 12px 10px;
     }
 
     .login-content {
-      padding: 18px 16px 80px;
+      padding: 18px 16px 48px;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
-    .login-content h2 {
-      margin: 0 0 18px;
-      font-size: 2rem;
+    .login-header {
+      background: var(--brand-blue);
+      color: #fff;
+      font-size: clamp(1.8rem, 2.6vw, 2rem);
+      font-weight: 700;
+      padding: 12px 14px;
+    }
+
+    .card-area {
+      background: #fff;
+      border: 1px solid #dddddd;
+      border-radius: 10px;
+      padding: 22px 20px;
+      margin-top: 18px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-area h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.7rem, 2.8vw, 2.15rem);
       font-weight: 800;
       line-height: 1.2;
     }
 
     .field-label {
       display: block;
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       font-weight: 700;
       margin: 14px 0 8px;
     }
 
     .field-input {
       width: 100%;
-      height: 48px;
+      height: 50px;
       border: 2px solid #222;
       border-radius: 4px;
       padding: 0 12px;
       font-size: 1.05rem;
-      background: #ffffff;
-      font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      background: #fff;
+      font-family: inherit;
     }
 
     .primary-btn {
-      display: block;
-      margin: 20px auto 0;
-      width: 210px;
-      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 22px 0 0;
+      min-width: 230px;
+      height: 46px;
       border: none;
-      border-radius: 22px;
-      background: #0f56b3;
-      color: #ffffff;
-      font-size: 1.15rem;
+      border-radius: 23px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-size: 1.1rem;
       font-weight: 700;
       cursor: pointer;
-      font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      font-family: inherit;
+      padding: 0 22px;
     }
 
     .feedback {
       margin-top: 14px;
       font-size: 1rem;
       font-weight: 700;
-      text-align: center;
       min-height: 24px;
       padding: 0 6px;
     }
@@ -301,52 +400,108 @@
       font-weight: 700;
     }
 
-    .security-banner {
-      background: #fff8d8;
-      border-bottom: 1px solid #e5d38a;
-      padding: 12px 16px;
-      font-size: 1rem;
-      line-height: 1.4;
+    .fake-notification {
+      position: sticky;
+      top: 51px;
+      z-index: 24;
+      padding: 8px 10px 0;
+      background: linear-gradient(to bottom, rgba(243,243,243,1) 75%, rgba(243,243,243,0));
     }
 
-    .security-banner strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 1.05rem;
+    .notification-card {
+      background: #f1f1f1;
+      border: 1px solid #d2d2d2;
+      border-radius: 18px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
     }
 
-    .security-code-inline {
-      font-size: 1.55rem;
-      letter-spacing: 5px;
-      font-weight: 800;
-      color: #2349c7;
-      margin-top: 4px;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
+    .notify-app {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid #ddd;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 18px;
-      z-index: 30;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #666;
+      flex-shrink: 0;
     }
 
-    .modal-box {
-      background: #ffffff;
-      width: 100%;
-      max-width: 340px;
-      border-radius: 10px;
-      padding: 20px 18px;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    .notify-body {
+      flex: 1;
+      min-width: 0;
     }
 
-    .modal-box h3 {
-      margin: 0 0 10px;
-      font-size: 1.8rem;
+    .notify-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .notify-top strong {
+      font-size: 1rem;
+    }
+
+    .notify-time {
+      font-size: 0.85rem;
+      color: #777;
+      white-space: nowrap;
+    }
+
+    .notify-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #222;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+
+    .notify-text {
+      font-size: 0.92rem;
+      color: #555;
+      line-height: 1.35;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .otp-box {
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .code-highlight {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: #eef4ff;
+      color: var(--brand-blue);
+      font-size: 1.35rem;
+      letter-spacing: 4px;
+      font-weight: 800;
+    }
+
+    .secondary-link {
+      margin-top: 16px;
+      color: var(--brand-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-block;
     }
 
     .small-note {
@@ -357,17 +512,10 @@
 
     .welcome-wrap {
       padding: 0 0 24px;
-      background: #efefef;
+      background: var(--light-grey);
       min-height: 100%;
-    }
-
-    .welcome-box {
-      background: #ffffff;
-      border: 1px solid #dddddd;
-      border-radius: 8px;
-      padding: 20px 16px;
-      text-align: center;
-      margin: 16px 12px 0;
+      display: flex;
+      flex-direction: column;
     }
 
     .welcome-top {
@@ -378,20 +526,29 @@
       font-size: 1rem;
       font-weight: 700;
       color: #555;
-      padding: 0 12px;
+      padding: 12px 12px 0;
+    }
+
+    .welcome-box {
+      background: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+      margin: 12px 12px 0;
     }
 
     .welcome-banner {
       padding: 16px 14px 8px;
-      background: #efefef;
+      background: var(--light-grey);
     }
 
     .popular-title {
-      font-size: 1.8rem;
+      font-size: 1.75rem;
       font-weight: 800;
       color: #333;
       padding: 14px 12px 8px;
-      background: #efefef;
+      background: var(--light-grey);
     }
 
     .products-grid {
@@ -399,20 +556,20 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       padding: 0 10px 14px;
-      background: #efefef;
+      background: var(--light-grey);
     }
 
     .product-card {
-      background: #ffffff;
+      background: #fff;
       border: 1px solid #dddddd;
       border-radius: 4px;
       padding: 10px;
-      min-height: 180px;
+      min-height: 190px;
     }
 
     .product-card img {
       width: 100%;
-      height: 100px;
+      height: 108px;
       object-fit: contain;
       background: #fff;
       margin-bottom: 8px;
@@ -428,73 +585,214 @@
 
     .price {
       font-size: 1.35rem;
-      color: #0f56b3;
+      color: var(--brand-dark);
       font-weight: 800;
     }
 
-    .disclaimer {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #666;
-      padding: 14px 16px 18px;
-      background: #efefef;
-    }
-
-    .nav-arrows {
+    .helper-popup {
       position: fixed;
-      right: 18px;
-      bottom: 18px;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.42);
       display: flex;
-      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
       z-index: 40;
     }
 
-    .arrow-btn {
-      width: 46px;
-      height: 46px;
-      border: none;
-      border-radius: 50%;
-      background: #0f56b3;
-      color: #fff;
+    .helper-popup .popup-box {
+      background: #fff;
+      width: 100%;
+      max-width: 360px;
+      border-radius: 12px;
+      padding: 20px 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .helper-popup h3 {
+      margin: 0 0 10px;
       font-size: 1.4rem;
-      font-weight: 800;
+    }
+
+    .helper-popup p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.45;
+      color: #555;
+    }
+
+    .popup-close {
+      margin-top: 16px;
+      min-width: 120px;
+      height: 40px;
+      border: none;
+      border-radius: 20px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-family: inherit;
+      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
     }
 
-    .arrow-btn:disabled {
-      background: #bfc7de;
-      cursor: default;
-      box-shadow: none;
-    }
-
-    @media (min-width: 700px) {
-      .page, .login-page {
-        border-radius: 18px;
+    @media (max-width: 900px) {
+      .app-shell {
+        padding: 0;
       }
-      .phone-frame, .login-phone {
-        border-left: 18px solid #111;
-        border-right: 18px solid #111;
-        border-top: 14px solid #111;
-        border-bottom: 14px solid #111;
-        border-radius: 28px;
-        min-height: 860px;
-      }
-    }
 
-    @media (max-width: 450px) {
-      .app-shell { padding: 0; }
-      .page, .login-page {
+      .screen,
+      .page-inner {
         min-height: 100vh;
+        border-radius: 0;
         box-shadow: none;
       }
-      .phone-frame, .login-phone {
-        min-height: 100vh;
-        max-width: 100%;
+
+      .hero {
+        min-height: 208px;
       }
-      .logo { font-size: 1.7rem; }
-      .login-content h2 { font-size: 1.8rem; }
-      .nav-arrows { right: 10px; bottom: 10px; }
+
+      .hero-text {
+        top: 54px;
+        max-width: 54%;
+      }
+
+      .hero img {
+        width: min(46vw, 215px);
+        max-width: 50%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .browser-strip {
+        padding: 7px 8px;
+        gap: 6px;
+      }
+
+      .browser-nav {
+        min-width: auto;
+      }
+
+      .browser-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.95rem;
+      }
+
+      .browser-address {
+        font-size: 0.86rem;
+        padding: 7px 10px;
+      }
+
+      .nav-bar {
+        padding: 10px 10px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .sign-in-link {
+        font-size: 0.96rem;
+      }
+
+      .search-bar-wrap {
+        padding: 10px 10px 12px;
+      }
+
+      .search-box {
+        height: 38px;
+        font-size: 0.95rem;
+      }
+
+      .search-icon-box {
+        width: 38px;
+        height: 38px;
+      }
+
+      .hero {
+        min-height: 188px;
+      }
+
+      .hero-text {
+        top: 32px;
+        left: 14px;
+        max-width: 56%;
+      }
+
+      .hero-text h1 {
+        font-size: 1.45rem;
+        margin-bottom: 12px;
+      }
+
+      .shop-btn {
+        padding: 8px 14px;
+        font-size: 0.98rem;
+      }
+
+      .hero img {
+        right: 6px;
+        top: 20px;
+        width: 46%;
+        max-width: 180px;
+      }
+
+      .cards-row,
+      .info-row,
+      .products-grid {
+        gap: 8px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .small-card p,
+      .info-card,
+      .disclaimer,
+      .notify-text,
+      .otp-box,
+      .small-note,
+      .field-label,
+      .field-input,
+      .feedback {
+        font-size: 0.94rem;
+      }
+
+      .login-content {
+        padding: 12px 10px 36px;
+      }
+
+      .card-area {
+        margin-top: 12px;
+        padding: 18px 14px;
+      }
+
+      .card-area h2 {
+        font-size: 1.55rem;
+      }
+
+      .primary-btn {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .fake-notification {
+        top: 45px;
+        padding: 8px 8px 0;
+      }
+
+      .notification-card {
+        border-radius: 16px;
+        padding: 8px 10px;
+      }
+
+      .notify-app {
+        width: 34px;
+        height: 34px;
+        font-size: 0.8rem;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     svg { display: block; }
@@ -503,13 +801,21 @@
 <body>
   <div class="app-shell">
     <!-- PAGE 1: HOMEPAGE -->
-    <section id="homePage" class="page">
-      <div class="phone-frame">
+    <section id="homePage" class="screen">
+      <div class="page-inner">
         <div class="top-blue"></div>
+
+        <div class="browser-strip">
+          <div class="browser-nav">
+            <button class="browser-btn" id="backBtn" onclick="goBack()" aria-label="Go back">&#8592;</button>
+            <button class="browser-btn" id="forwardBtn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
+          </div>
+          <div class="browser-address">techzone.com.au</div>
+        </div>
 
         <div class="nav-bar">
           <div class="nav-left">
-            <div class="icon-button" onclick="wrongIcon('This is the menu button. It opens different parts of the website.')">
+            <div class="icon-button" onclick="showHelper('Menu', 'This is the menu button. It opens different parts of the website.')">
               <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
                 <line x1="3" y1="6" x2="21" y2="6" stroke="#7a7a7a" stroke-width="2.5" stroke-linecap="round"/>
                 <line x1="3" y1="12" x2="21" y2="12" stroke="#7a7a7a" stroke-width="2.5" stroke-linecap="round"/>
@@ -527,7 +833,7 @@
                 <path d="M4 21c0-4.4 3.7-7 8-7s8 2.6 8 7" fill="#7a7a7a"/>
               </svg>
             </div>
-            <div class="icon-button" onclick="wrongIcon('This is the cart button. Tap here to see the items you want to buy.')">
+            <div class="icon-button" onclick="showHelper('Cart', 'This is the cart button. Tap here to see the items you want to buy.')">
               <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="9" cy="20" r="1.8" fill="#7a7a7a"/>
                 <circle cx="18" cy="20" r="1.8" fill="#7a7a7a"/>
@@ -539,7 +845,7 @@
 
         <div class="search-bar-wrap">
           <input class="search-box" type="text" value="Search techzone.com.au" readonly>
-          <div class="search-icon-box" onclick="wrongIcon('This is the search button. Tap here to look for products on the website.')">
+          <div class="search-icon-box" onclick="showHelper('Search', 'Not quite. This is the search button. Tap here to look for products on the website.')">
             <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="10" cy="10" r="6.5" fill="none" stroke="#ffffff" stroke-width="2.5"/>
               <line x1="15" y1="15" x2="21" y2="21" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
@@ -557,116 +863,188 @@
           <img src="hero-headphones.png" alt="Headphones product image" onerror="this.style.display='none'">
         </div>
 
-        <div class="cards-row">
-          <div class="small-card">
-            <!-- PUT LAPTOP IMAGE HERE -->
-            <img src="laptop.png" alt="Laptop category" onerror="this.style.display='none'">
-            <p>Laptops</p>
+        <div class="page-end">
+          <div class="cards-row">
+            <div class="small-card">
+              <img src="laptop.png" alt="Laptop category" onerror="this.style.display='none'">
+              <p>Laptops</p>
+            </div>
+            <div class="small-card">
+              <img src="smartphone.png" alt="Smartphones category" onerror="this.style.display='none'">
+              <p>Smartphones</p>
+            </div>
+            <div class="small-card">
+              <img src="headphones-small.png" alt="Headphones category" onerror="this.style.display='none'">
+              <p>Headphones</p>
+            </div>
           </div>
-          <div class="small-card">
-            <!-- PUT SMARTPHONE IMAGE HERE -->
-            <img src="smartphone.png" alt="Smartphones category" onerror="this.style.display='none'">
-            <p>Smartphones</p>
-          </div>
-          <div class="small-card">
-            <!-- PUT HEADPHONES CATEGORY IMAGE HERE -->
-            <img src="headphones-small.png" alt="Headphones category" onerror="this.style.display='none'">
-            <p>Headphones</p>
-          </div>
-        </div>
 
-        <div class="info-row">
-          <div class="info-card">Fast Shipping</div>
-          <div class="info-card">Easy Returns</div>
-          <div class="info-card">Secure Payments</div>
-        </div>
+          <div class="info-row">
+            <div class="info-card">Fast Shipping</div>
+            <div class="info-card">Easy Returns</div>
+            <div class="info-card">Secure Payments</div>
+          </div>
 
-        <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+          <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        </div>
       </div>
     </section>
 
     <!-- PAGE 2: ENTER EMAIL -->
-    <section id="emailPage" class="login-page hidden">
-      <div class="login-phone">
+    <section id="emailPage" class="screen hidden login-page">
+      <div class="page-inner">
+        <div class="browser-strip">
+          <div class="browser-nav">
+            <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
+            <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
+          </div>
+          <div class="browser-address">techzone.com.au/signin</div>
+        </div>
+
         <div class="login-header">TechZone</div>
         <div class="login-content">
-          <h2>Sign In or create account</h2>
-          <label class="field-label" for="email">Enter email</label>
-          <input id="email" class="field-input" type="text" autocomplete="off">
-          <button class="primary-btn" onclick="verifyEmailOnly()">Verify email</button>
-          <div id="emailFeedback" class="feedback"></div>
+          <div class="card-area">
+            <h2>Sign in or create account</h2>
+            <label class="field-label" for="email">Enter email</label>
+            <input id="email" class="field-input" type="text" autocomplete="off">
+            <button class="primary-btn" onclick="verifyEmailOnly()">Verify email</button>
+            <div id="emailFeedback" class="feedback"></div>
+          </div>
         </div>
-        <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        <div class="page-end">
+          <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        </div>
       </div>
     </section>
 
     <!-- PAGE 3: NEW USER -->
-    <section id="newUserPage" class="login-page hidden">
-      <div class="login-phone">
+    <section id="newUserPage" class="screen hidden login-page">
+      <div class="page-inner">
+        <div class="browser-strip">
+          <div class="browser-nav">
+            <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
+            <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
+          </div>
+          <div class="browser-address">techzone.com.au/new-account</div>
+        </div>
+
         <div class="login-header">TechZone</div>
         <div class="login-content">
-          <h2>Looks like you're new to TechZone</h2>
-          <p class="small-note">Tap the button to create your account.</p>
-          <button class="primary-btn" onclick="goToPage(3)">Create an account</button>
+          <div class="card-area">
+            <h2>Looks like you're new to TechZone</h2>
+            <p class="small-note">Tap the button to create your account.</p>
+            <button class="primary-btn" onclick="goToPage(3)">Create an account</button>
+          </div>
         </div>
-        <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        <div class="page-end">
+          <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        </div>
       </div>
     </section>
 
     <!-- PAGE 4: NAME + PASSWORD -->
-    <section id="detailsPage" class="login-page hidden">
-      <div class="login-phone">
+    <section id="detailsPage" class="screen hidden login-page">
+      <div class="page-inner">
+        <div class="browser-strip">
+          <div class="browser-nav">
+            <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
+            <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
+          </div>
+          <div class="browser-address">techzone.com.au/create-account</div>
+        </div>
+
         <div class="login-header">TechZone</div>
         <div class="login-content">
-          <h2>Create your account</h2>
+          <div class="card-area">
+            <h2>Create your account</h2>
 
-          <label class="field-label" for="firstName">First name</label>
-          <input id="firstName" class="field-input" type="text" autocomplete="off">
+            <label class="field-label" for="firstName">First name</label>
+            <input id="firstName" class="field-input" type="text" autocomplete="off">
 
-          <label class="field-label" for="lastName">Last name</label>
-          <input id="lastName" class="field-input" type="text" autocomplete="off">
+            <label class="field-label" for="lastName">Last name</label>
+            <input id="lastName" class="field-input" type="text" autocomplete="off">
 
-          <label class="field-label" for="password">Password</label>
-          <input id="password" class="field-input" type="password" autocomplete="off">
+            <label class="field-label" for="password">Password</label>
+            <input id="password" class="field-input" type="password" autocomplete="off">
 
-          <label class="show-password-row">
-            <input type="checkbox" onclick="togglePassword()"> Show password
-          </label>
+            <label class="show-password-row">
+              <input type="checkbox" onclick="togglePassword()"> Show password
+            </label>
 
-          <button class="primary-btn" onclick="verifyDetails()">Verify email</button>
-          <div id="formFeedback" class="feedback"></div>
+            <button class="primary-btn" onclick="verifyDetails()">Verify email</button>
+            <div id="formFeedback" class="feedback"></div>
+          </div>
         </div>
-        <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        <div class="page-end">
+          <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        </div>
       </div>
     </section>
 
     <!-- PAGE 5: ENTER SECURITY CODE -->
-    <section id="codePage" class="login-page hidden">
-      <div class="login-phone">
+    <section id="codePage" class="screen hidden login-page">
+      <div class="page-inner">
+        <div class="browser-strip">
+          <div class="browser-nav">
+            <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
+            <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
+          </div>
+          <div class="browser-address">techzone.com.au/verify-email</div>
+        </div>
+
+        <div class="fake-notification">
+          <div class="notification-card">
+            <div class="notify-app">TZ</div>
+            <div class="notify-body">
+              <div class="notify-top">
+                <strong>TechZone</strong>
+                <span class="notify-time">now</span>
+              </div>
+              <div class="notify-title">Your verification code is ready</div>
+              <div class="notify-text">Use code <span id="displayCodeInlineShort">483921</span> to verify your email.</div>
+            </div>
+          </div>
+        </div>
+
         <div class="login-header">TechZone</div>
-        <div class="security-banner">
-          <strong>Security code</strong>
-          <div>Use this 6 digit code:</div>
-          <div class="security-code-inline" id="displayCodeInline">483921</div>
-        </div>
         <div class="login-content">
-          <h2>Enter security code</h2>
-          <label class="field-label" for="securityCode">Security code</label>
-          <input id="securityCode" class="field-input" type="text" maxlength="6" autocomplete="off">
-          <button class="primary-btn" onclick="createAccount()">Create your account</button>
-          <div id="codeFeedback" class="feedback"></div>
+          <div class="card-area">
+            <h2>Verify email address</h2>
+            <div class="otp-box">
+              To verify your email, use this 6 digit code.<br>
+              <span class="code-highlight" id="displayCodeInline">483921</span>
+            </div>
+
+            <label class="field-label" for="securityCode">Enter security code</label>
+            <input id="securityCode" class="field-input" type="text" inputmode="numeric" maxlength="6" autocomplete="off">
+
+            <button class="primary-btn" onclick="checkCode()">Create your account</button>
+            <div id="codeFeedback" class="feedback"></div>
+            <div class="secondary-link" onclick="resendCode()">Resend code</div>
+          </div>
         </div>
-        <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        <div class="page-end">
+          <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        </div>
       </div>
     </section>
 
-    <!-- PAGE 6: WELCOME HOME -->
-    <section id="welcomePage" class="page hidden">
-      <div class="phone-frame welcome-wrap">
+    <!-- PAGE 6: WELCOME / HOME -->
+    <section id="welcomePage" class="screen hidden">
+      <div class="page-inner welcome-wrap">
         <div class="top-blue"></div>
+
+        <div class="browser-strip">
+          <div class="browser-nav">
+            <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
+            <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
+          </div>
+          <div class="browser-address">techzone.com.au/home</div>
+        </div>
+
         <div class="nav-bar">
           <div class="nav-left">
-            <div class="icon-button">
+            <div class="icon-button" onclick="showHelper('Menu', 'This is the menu button. It opens different parts of the website.')">
               <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
                 <line x1="3" y1="6" x2="21" y2="6" stroke="#7a7a7a" stroke-width="2.5" stroke-linecap="round"/>
                 <line x1="3" y1="12" x2="21" y2="12" stroke="#7a7a7a" stroke-width="2.5" stroke-linecap="round"/>
@@ -675,18 +1053,28 @@
             </div>
             <div class="logo">TechZone</div>
           </div>
-          <div class="welcome-top">
-            <span id="welcomeName">Hossein</span>
-            <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="8" r="4.2" fill="#7a7a7a"/>
-              <path d="M4 21c0-4.4 3.7-7 8-7s8 2.6 8 7" fill="#7a7a7a"/>
-            </svg>
+
+          <div class="nav-right">
+            <div class="sign-in-link">Hi, <span id="welcomeName">User</span></div>
+            <div class="icon-button">
+              <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="4.2" fill="#7a7a7a"/>
+                <path d="M4 21c0-4.4 3.7-7 8-7s8 2.6 8 7" fill="#7a7a7a"/>
+              </svg>
+            </div>
+            <div class="icon-button" onclick="showHelper('Cart', 'This is the cart button. Tap here to see the items you want to buy.')">
+              <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="9" cy="20" r="1.8" fill="#7a7a7a"/>
+                <circle cx="18" cy="20" r="1.8" fill="#7a7a7a"/>
+                <path d="M3 4h2l2.2 9.2c.1.5.5.8 1 .8H18c.5 0 .9-.3 1-.8L21 7H7" fill="none" stroke="#7a7a7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
         </div>
 
         <div class="search-bar-wrap">
           <input class="search-box" type="text" value="Search techzone.com.au" readonly>
-          <div class="search-icon-box">
+          <div class="search-icon-box" onclick="showHelper('Search', 'Not quite. This is the search button. Tap here to look for products on the website.')">
             <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="10" cy="10" r="6.5" fill="none" stroke="#ffffff" stroke-width="2.5"/>
               <line x1="15" y1="15" x2="21" y2="21" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
@@ -694,193 +1082,222 @@
           </div>
         </div>
 
+        <div class="welcome-top">Welcome to your account</div>
+
+        <div class="welcome-box">
+          <h2 style="margin:0 0 10px; font-size: 2rem; color:#333;">You're in!</h2>
+          <p class="small-note" style="margin:0;">Your TechZone account is ready. Start browsing today's popular products.</p>
+        </div>
+
         <div class="welcome-banner">
-          <div class="welcome-box">
-            <h2 style="margin-top:0; color:#0f56b3; font-size:1.9rem;">Welcome to TechZone</h2>
-            <p style="font-size:1.2rem; font-weight:700; margin: 10px 0 0;">Hello, Hossein!</p>
-            <p style="margin: 12px 0 0; color:#555; line-height:1.5; font-size:1rem;">Your account is ready.</p>
+          <div class="hero" style="min-height: 210px; border-radius: 8px;">
+            <div class="hero-text" style="top:34px;">
+              <h1 style="font-size: clamp(1.7rem, 2.8vw, 2.35rem);">Welcome to<br>TechZone</h1>
+              <button class="shop-btn">Shop now</button>
+            </div>
+            <img src="hero-headphones.png" alt="Headphones product image" onerror="this.style.display='none'">
           </div>
         </div>
 
-        <div class="hero">
-          <div class="hero-text">
-            <h1>Great deals on<br>headphones!</h1>
-            <button class="shop-btn">Shop Now</button>
-          </div>
-          <!-- PUT HERO HEADPHONES IMAGE HERE -->
-          <img src="hero-headphones.png" alt="Headphones product image" onerror="this.style.display='none'">
-        </div>
-
-        <div class="cards-row">
-          <div class="small-card">
-            <!-- PUT LAPTOP IMAGE HERE -->
-            <img src="laptop.png" alt="Laptop category" onerror="this.style.display='none'">
-            <p>Laptops</p>
-          </div>
-          <div class="small-card">
-            <!-- PUT SMARTPHONE IMAGE HERE -->
-            <img src="smartphone.png" alt="Smartphones category" onerror="this.style.display='none'">
-            <p>Smartphones</p>
-          </div>
-          <div class="small-card">
-            <!-- PUT HEADPHONES CATEGORY IMAGE HERE -->
-            <img src="headphones-small.png" alt="Headphones category" onerror="this.style.display='none'">
-            <p>Headphones</p>
-          </div>
-        </div>
-
-        <div class="popular-title">Popular Products</div>
+        <div class="popular-title">Popular now</div>
         <div class="products-grid">
           <div class="product-card">
-            <!-- PUT PRODUCT IMAGE 1 HERE -->
-            <img src="product-1.png" alt="Wireless earbuds" onerror="this.style.display='none'">
-            <h4>Wireless Earbuds</h4>
-            <div class="price">$59.99</div>
+            <img src="headphones-small.png" alt="Wireless headphones" onerror="this.style.display='none'">
+            <h4>Wireless Headphones</h4>
+            <div class="price">$39</div>
           </div>
           <div class="product-card">
-            <!-- PUT PRODUCT IMAGE 2 HERE -->
-            <img src="product-2.png" alt="Smart watch" onerror="this.style.display='none'">
-            <h4>Smart Watch</h4>
-            <div class="price">$199.00</div>
+            <img src="smartphone.png" alt="Phone accessory" onerror="this.style.display='none'">
+            <h4>Phone Accessories</h4>
+            <div class="price">From $12</div>
+          </div>
+          <div class="product-card">
+            <img src="laptop.png" alt="Student laptop" onerror="this.style.display='none'">
+            <h4>Student Laptops</h4>
+            <div class="price">$499</div>
+          </div>
+          <div class="product-card">
+            <img src="headphones-small.png" alt="Bluetooth earbuds" onerror="this.style.display='none'">
+            <h4>Bluetooth Earbuds</h4>
+            <div class="price">$29</div>
           </div>
         </div>
 
-        <div class="info-row">
-          <div class="info-card">Fast Shipping</div>
-          <div class="info-card">Easy Returns</div>
-          <div class="info-card">Secure Payments</div>
+        <div class="page-end">
+          <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
         </div>
-
-        <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
       </div>
     </section>
   </div>
 
-  <!-- WRONG ICON POPUP -->
-  <div id="wrongModal" class="modal-overlay hidden">
-    <div class="modal-box">
-      <h3>Not quite</h3>
-      <p id="wrongModalText" class="small-note"></p>
-      <button class="primary-btn" style="margin-top:14px;" onclick="closeWrongModal()">Try again</button>
+  <div id="helperPopup" class="helper-popup hidden" aria-hidden="true">
+    <div class="popup-box">
+      <h3 id="helperTitle">Not quite</h3>
+      <p id="helperText">This is the search button.</p>
+      <button class="popup-close" onclick="closeHelper()">OK</button>
     </div>
   </div>
 
-  <div class="nav-arrows">
-    <button id="backBtn" class="arrow-btn" onclick="goBack()">←</button>
-    <button id="forwardBtn" class="arrow-btn" onclick="goForward()">→</button>
-  </div>
-
   <script>
-    const correctEmail = 'hossein@email.com';
-    const correctFirstName = 'Hossein';
-    const correctLastName = 'Ahmadi';
-    const correctPassword = 'Hossein123';
-    const correctCode = '483921';
+    const pages = [
+      document.getElementById('homePage'),
+      document.getElementById('emailPage'),
+      document.getElementById('newUserPage'),
+      document.getElementById('detailsPage'),
+      document.getElementById('codePage'),
+      document.getElementById('welcomePage')
+    ];
 
-    const pageOrder = ['homePage', 'emailPage', 'newUserPage', 'detailsPage', 'codePage', 'welcomePage'];
-    let currentPageIndex = 0;
-    let maxReachedIndex = 0;
+    let currentPage = 0;
+    let currentCode = '483921';
+    const historyStack = [0];
+    const forwardStack = [];
 
-    function showPageByIndex(index) {
-      pageOrder.forEach(id => document.getElementById(id).classList.add('hidden'));
-      document.getElementById(pageOrder[index]).classList.remove('hidden');
-      currentPageIndex = index;
-      if (index > maxReachedIndex) maxReachedIndex = index;
-      updateArrowButtons();
-      window.scrollTo(0, 0);
+    function renderPage(index) {
+      pages.forEach((page, i) => {
+        page.classList.toggle('hidden', i !== index);
+      });
+      currentPage = index;
+      updateNavButtons();
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    function navigateTo(index, recordHistory = true) {
+      if (index < 0 || index >= pages.length) return;
+      if (recordHistory && historyStack[historyStack.length - 1] !== index) {
+        historyStack.push(index);
+        forwardStack.length = 0;
+      }
+      renderPage(index);
     }
 
     function goToPage(index) {
-      showPageByIndex(index);
+      navigateTo(index, true);
     }
 
     function goBack() {
-      if (currentPageIndex > 0) {
-        showPageByIndex(currentPageIndex - 1);
-      }
+      if (historyStack.length <= 1) return;
+      const current = historyStack.pop();
+      forwardStack.push(current);
+      const previous = historyStack[historyStack.length - 1];
+      renderPage(previous);
     }
 
     function goForward() {
-      if (currentPageIndex < maxReachedIndex) {
-        showPageByIndex(currentPageIndex + 1);
-      }
+      if (!forwardStack.length) return;
+      const next = forwardStack.pop();
+      historyStack.push(next);
+      renderPage(next);
     }
 
-    function updateArrowButtons() {
-      document.getElementById('backBtn').disabled = currentPageIndex === 0;
-      document.getElementById('forwardBtn').disabled = currentPageIndex >= maxReachedIndex;
+    function updateNavButtons() {
+      document.querySelectorAll('.browser-btn').forEach(btn => {
+        const action = btn.textContent.trim();
+        if (action === '←') btn.disabled = historyStack.length <= 1;
+        if (action === '→') btn.disabled = forwardStack.length === 0;
+      });
     }
 
-    function wrongIcon(message) {
-      document.getElementById('wrongModalText').textContent = message;
-      document.getElementById('wrongModal').classList.remove('hidden');
+    function showHelper(title, text) {
+      document.getElementById('helperTitle').textContent = title || 'Not quite';
+      document.getElementById('helperText').textContent = text;
+      document.getElementById('helperPopup').classList.remove('hidden');
     }
 
-    function closeWrongModal() {
-      document.getElementById('wrongModal').classList.add('hidden');
+    function closeHelper() {
+      document.getElementById('helperPopup').classList.add('hidden');
     }
 
     function verifyEmailOnly() {
       const email = document.getElementById('email').value.trim();
       const feedback = document.getElementById('emailFeedback');
 
-      if (email !== correctEmail) {
-        feedback.textContent = 'Incorrect email. Try again.';
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        feedback.textContent = 'Please enter a valid email address.';
         feedback.className = 'feedback error';
         return;
       }
 
-      feedback.textContent = 'Correct email.';
-      feedback.className = 'feedback success';
-      setTimeout(() => showPageByIndex(2), 500);
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+      goToPage(2);
     }
 
     function togglePassword() {
-      const passwordInput = document.getElementById('password');
-      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+      const password = document.getElementById('password');
+      password.type = password.type === 'password' ? 'text' : 'password';
     }
 
     function verifyDetails() {
       const firstName = document.getElementById('firstName').value.trim();
       const lastName = document.getElementById('lastName').value.trim();
-      const password = document.getElementById('password').value;
+      const password = document.getElementById('password').value.trim();
       const feedback = document.getElementById('formFeedback');
 
-      if (firstName !== correctFirstName || lastName !== correctLastName) {
-        feedback.textContent = 'Incorrect name. Try again.';
+      if (!firstName || !lastName || !password) {
+        feedback.textContent = 'Please complete all fields.';
         feedback.className = 'feedback error';
         return;
       }
 
-      if (password !== correctPassword) {
-        feedback.textContent = 'Incorrect password. Try again.';
+      if (password.length < 6) {
+        feedback.textContent = 'Password must be at least 6 characters.';
         feedback.className = 'feedback error';
         return;
       }
 
-      feedback.textContent = 'Correct details.';
-      feedback.className = 'feedback success';
-      document.getElementById('displayCodeInline').textContent = correctCode;
-      setTimeout(() => showPageByIndex(4), 500);
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+      currentCode = generateCode();
+      updateDisplayedCode();
+      goToPage(4);
     }
 
-    function createAccount() {
-      const code = document.getElementById('securityCode').value.trim();
+    function generateCode() {
+      return String(Math.floor(100000 + Math.random() * 900000));
+    }
+
+    function updateDisplayedCode() {
+      document.getElementById('displayCodeInline').textContent = currentCode;
+      document.getElementById('displayCodeInlineShort').textContent = currentCode;
+    }
+
+    function resendCode() {
+      currentCode = generateCode();
+      updateDisplayedCode();
+      const feedback = document.getElementById('codeFeedback');
+      feedback.textContent = 'A new code has been sent.';
+      feedback.className = 'feedback success';
+      document.getElementById('securityCode').value = '';
+    }
+
+    function checkCode() {
+      const input = document.getElementById('securityCode').value.trim();
       const feedback = document.getElementById('codeFeedback');
 
-      if (code !== correctCode) {
-        feedback.textContent = 'Incorrect security code. Try again.';
-        feedback.className = 'feedback error';
-        return;
-      }
+      if (input === currentCode) {
+        feedback.textContent = 'Code accepted.';
+        feedback.className = 'feedback success';
 
-      feedback.textContent = 'Correct code.';
-      feedback.className = 'feedback success';
-      document.getElementById('welcomeName').textContent = 'Hossein';
-      setTimeout(() => showPageByIndex(5), 500);
+        const firstName = document.getElementById('firstName').value.trim() || 'User';
+        document.getElementById('welcomeName').textContent = firstName;
+
+        setTimeout(() => {
+          feedback.textContent = '';
+          feedback.className = 'feedback';
+          goToPage(5);
+        }, 500);
+      } else {
+        feedback.textContent = 'That code is not correct. Please try again.';
+        feedback.className = 'feedback error';
+      }
     }
 
-    showPageByIndex(0);
+    document.getElementById('helperPopup').addEventListener('click', function (event) {
+      if (event.target === this) closeHelper();
+    });
+
+    renderPage(0);
   </script>
 </body>
 </html>
