@@ -168,10 +168,10 @@
     }
 
     .icon-button {
-      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
     }
 
     .search-bar-wrap {
@@ -201,8 +201,8 @@
       align-items: center;
       justify-content: center;
       color: #fff;
-      cursor: pointer;
       flex-shrink: 0;
+      cursor: pointer;
     }
 
     .hero {
@@ -272,15 +272,19 @@
       border: 1px solid #dddddd;
       border-radius: 4px;
       text-align: center;
-      padding: 8px 4px;
-      min-height: 86px;
+      padding: 12px 8px;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     .small-card img {
-      width: 52px;
-      height: 38px;
+      width: 90px;
+      height: 68px;
       object-fit: contain;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
 
     .small-card p {
@@ -483,34 +487,6 @@
       margin-bottom: 2px;
     }
 
-    .notify-text {
-      font-size: 1rem;
-      color: #555;
-      line-height: 1.35;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    .otp-box {
-      font-size: 0.98rem;
-      line-height: 1.55;
-      color: #444;
-      margin-bottom: 10px;
-    }
-
-    .code-highlight {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 4px 10px;
-      border-radius: 8px;
-      background: #eef4ff;
-      color: var(--brand-blue);
-      font-size: 1.35rem;
-      letter-spacing: 4px;
-      font-weight: 800;
-    }
-
     .secondary-link {
       margin-top: 16px;
       color: var(--brand-dark);
@@ -534,21 +510,6 @@
       flex-direction: column;
     }
 
-    .welcome-top {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 8px;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #555;
-      padding: 12px 12px 0;
-    }
-
-    .welcome-box {
-      display: none;
-    }
-
     .welcome-banner {
       padding: 16px 14px 8px;
       background: var(--light-grey);
@@ -561,13 +522,6 @@
       max-width: 80%;
       width: 80%;
       text-align: center;
-    }
-
-    .hero-centered .shop-btn {
-      margin: 0 auto;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .popular-title {
@@ -616,49 +570,55 @@
       font-weight: 800;
     }
 
-    .helper-popup {
-      position: fixed;
+    .popup-overlay {
+      position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.42);
-      display: flex;
+      background: rgba(0, 0, 0, 0.22);
+      display: none;
       align-items: center;
       justify-content: center;
-      padding: 18px;
-      z-index: 40;
+      z-index: 50;
+      padding: 20px;
     }
 
-    .helper-popup .popup-box {
+    .popup-overlay.show {
+      display: flex;
+    }
+
+    .popup-box {
+      width: min(92%, 360px);
       background: #fff;
-      width: 100%;
-      max-width: 360px;
-      border-radius: 12px;
-      padding: 20px 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border-radius: 14px;
+      padding: 24px 20px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
 
-    .helper-popup h3 {
-      margin: 0 0 10px;
-      font-size: 1.4rem;
+    .popup-box h3 {
+      margin: 0 0 12px;
+      font-size: 1.9rem;
+      line-height: 1.1;
+      font-weight: 800;
+      color: #222;
     }
 
-    .helper-popup p {
-      margin: 0;
+    .popup-box p {
+      margin: 0 0 18px;
       font-size: 1rem;
-      line-height: 1.45;
+      line-height: 1.5;
       color: #555;
     }
 
-    .popup-close {
-      margin-top: 16px;
-      min-width: 120px;
+    .popup-ok {
+      min-width: 140px;
       height: 40px;
       border: none;
       border-radius: 20px;
       background: var(--brand-dark);
       color: #fff;
-      font-family: inherit;
+      font-size: 1rem;
       font-weight: 700;
+      font-family: inherit;
       cursor: pointer;
     }
 
@@ -771,11 +731,18 @@
         padding-right: 8px;
       }
 
+      .small-card {
+        min-height: 160px;
+      }
+
+      .small-card img {
+        width: 72px;
+        height: 56px;
+      }
+
       .small-card p,
       .info-card,
       .disclaimer,
-      .notify-text,
-      .otp-box,
       .small-note,
       .field-label,
       .field-input,
@@ -820,6 +787,10 @@
       .products-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .popup-box h3 {
+        font-size: 1.7rem;
+      }
     }
 
     svg { display: block; }
@@ -827,6 +798,7 @@
 </head>
 <body>
   <div class="app-shell">
+
     <!-- PAGE 1: HOMEPAGE -->
     <section id="homePage" class="screen">
       <div class="page-inner">
@@ -837,12 +809,20 @@
             <button class="browser-btn" id="backBtn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" id="forwardBtn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au</span></div>
+          <div class="browser-address">
+            <span class="address-lock">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/>
+                <path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="address-text">www.techzone.com.au</span>
+          </div>
         </div>
 
         <div class="nav-bar">
           <div class="nav-left">
-            <div class="icon-button" onclick="showHelper('Menu', 'This is the menu button. It opens different parts of the website.')">
+            <div class="icon-button" onclick="showPopup('menuPopup')">
               <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
                 <line x1="3" y1="6" x2="21" y2="6" stroke="#7a7a7a" stroke-width="2.5" stroke-linecap="round"/>
                 <line x1="3" y1="12" x2="21" y2="12" stroke="#7a7a7a" stroke-width="2.5" stroke-linecap="round"/>
@@ -860,7 +840,7 @@
                 <path d="M4 21c0-4.4 3.7-7 8-7s8 2.6 8 7" fill="#7a7a7a"/>
               </svg>
             </div>
-            <div class="icon-button" onclick="showHelper('Cart', 'This is the cart button. Tap here to see the items you want to buy.')">
+            <div class="icon-button" onclick="showPopup('cartPopup')">
               <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="9" cy="20" r="1.8" fill="#7a7a7a"/>
                 <circle cx="18" cy="20" r="1.8" fill="#7a7a7a"/>
@@ -872,7 +852,7 @@
 
         <div class="search-bar-wrap">
           <input class="search-box" type="text" value="Search techzone.com.au" readonly>
-          <div class="search-icon-box" onclick="showHelper('Search', 'This is the search button. Tap here to look for products on the website.')">
+          <div class="search-icon-box" onclick="showPopup('searchPopup')">
             <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="10" cy="10" r="6.5" fill="none" stroke="#ffffff" stroke-width="2.5"/>
               <line x1="15" y1="15" x2="21" y2="21" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
@@ -883,36 +863,66 @@
         <div class="hero">
           <div class="hero-text">
             <h1>Great deals on<br>headphones!</h1>
-            <button class="shop-btn">Shop Now</button>
+            <button class="shop-btn" onclick="showPopup('shopPopup')">Shop Now</button>
           </div>
 
-          <!-- PUT HERO HEADPHONES IMAGE HERE -->
           <img src="hero-headphones.png" alt="Headphones product image" onerror="this.style.display='none'">
         </div>
 
-        <div class="page-end">
-          <div class="cards-row">
-            <div class="small-card">
-              <img src="laptop.png" alt="Laptop category" onerror="this.style.display='none'">
-              <p>Laptops</p>
-            </div>
-            <div class="small-card">
-              <img src="smartphone.png" alt="Smartphones category" onerror="this.style.display='none'">
-              <p>Smartphones</p>
-            </div>
-            <div class="small-card">
-              <img src="headphones-small.png" alt="Headphones category" onerror="this.style.display='none'">
-              <p>Headphones</p>
-            </div>
+        <div class="cards-row">
+          <div class="small-card">
+            <img src="laptop.png" alt="Laptop category" onerror="this.style.display='none'">
+            <p>Laptops</p>
           </div>
-
-          <div class="info-row">
-            <div class="info-card">Fast Shipping</div>
-            <div class="info-card">Easy Returns</div>
-            <div class="info-card">Secure Payments</div>
+          <div class="small-card">
+            <img src="smartphone.png" alt="Smartphones category" onerror="this.style.display='none'">
+            <p>Smartphones</p>
           </div>
+          <div class="small-card">
+            <img src="headphones-small.png" alt="Headphones category" onerror="this.style.display='none'">
+            <p>Headphones</p>
+          </div>
+        </div>
 
-          <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+        <div class="info-row">
+          <div class="info-card">Fast Shipping</div>
+          <div class="info-card">Easy Returns</div>
+          <div class="info-card">Secure Payments</div>
+        </div>
+
+        <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
+
+        <!-- POPUPS ONLY ON FIRST PAGE -->
+        <div id="menuPopup" class="popup-overlay">
+          <div class="popup-box">
+            <h3>Menu</h3>
+            <p>This is the menu button. Tap here to open more parts of the website.</p>
+            <button class="popup-ok" onclick="closePopup('menuPopup')">OK</button>
+          </div>
+        </div>
+
+        <div id="searchPopup" class="popup-overlay">
+          <div class="popup-box">
+            <h3>Search</h3>
+            <p>This is the search button. Tap here to look for products on the website.</p>
+            <button class="popup-ok" onclick="closePopup('searchPopup')">OK</button>
+          </div>
+        </div>
+
+        <div id="cartPopup" class="popup-overlay">
+          <div class="popup-box">
+            <h3>Cart</h3>
+            <p>This is the cart button. Tap here to see the items you want to buy.</p>
+            <button class="popup-ok" onclick="closePopup('cartPopup')">OK</button>
+          </div>
+        </div>
+
+        <div id="shopPopup" class="popup-overlay">
+          <div class="popup-box">
+            <h3>Shop now</h3>
+            <p>This button takes you to the products so you can start shopping.</p>
+            <button class="popup-ok" onclick="closePopup('shopPopup')">OK</button>
+          </div>
         </div>
       </div>
     </section>
@@ -925,7 +935,15 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/signin</span></div>
+          <div class="browser-address">
+            <span class="address-lock">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/>
+                <path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="address-text">www.techzone.com.au/signin</span>
+          </div>
         </div>
 
         <div class="login-header">TechZone</div>
@@ -952,7 +970,15 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/new-account</span></div>
+          <div class="browser-address">
+            <span class="address-lock">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/>
+                <path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="address-text">www.techzone.com.au/new-account</span>
+          </div>
         </div>
 
         <div class="login-header">TechZone</div>
@@ -977,7 +1003,15 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/create-account</span></div>
+          <div class="browser-address">
+            <span class="address-lock">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/>
+                <path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="address-text">www.techzone.com.au/create-account</span>
+          </div>
         </div>
 
         <div class="login-header">TechZone</div>
@@ -1016,7 +1050,15 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/verify-email</span></div>
+          <div class="browser-address">
+            <span class="address-lock">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/>
+                <path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="address-text">www.techzone.com.au/verify-email</span>
+          </div>
         </div>
 
         <div class="fake-notification">
@@ -1027,7 +1069,7 @@
                 <strong>TechZone</strong>
                 <span class="notify-time">now</span>
               </div>
-              <div class="notify-title"><strong>TechZone <span id="displayCodeInlineShort">483921</span> is the code to verify your email.</strong></div>
+              <div class="notify-title"><strong><span id="displayCodeInlineShort">483921</span> is the code to verify your email.</strong></div>
             </div>
           </div>
         </div>
@@ -1036,10 +1078,6 @@
         <div class="login-content">
           <div class="card-area">
             <h2>Verify email address</h2>
-            <div class="otp-box">
-              To verify your email, use this 6 digit code.<br>
-              <span class="code-highlight" id="displayCodeInline">483921</span>
-            </div>
 
             <label class="field-label" for="securityCode">Enter security code</label>
             <input id="securityCode" class="field-input" type="text" inputmode="numeric" maxlength="6" autocomplete="off">
@@ -1065,12 +1103,20 @@
             <button class="browser-btn" onclick="goBack()" aria-label="Go back">&#8592;</button>
             <button class="browser-btn" onclick="goForward()" aria-label="Go forward">&#8594;</button>
           </div>
-          <div class="browser-address"><span class="address-lock"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/><path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></span><span class="address-text">www.techzone.com.au/home</span></div>
+          <div class="browser-address">
+            <span class="address-lock">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2" fill="#000"/>
+                <path d="M8 10V7.5A4 4 0 0 1 12 3.5a4 4 0 0 1 4 4V10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="address-text">www.techzone.com.au/home</span>
+          </div>
         </div>
 
         <div class="nav-bar">
           <div class="nav-left">
-            <div class="icon-button" onclick="showHelper('Menu', 'This is the menu button. It opens different parts of the website.')">
+            <div class="icon-button">
               <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
                 <line x1="3" y1="6" x2="21" y2="6" stroke="#7a7a7a" stroke-width="2.5" stroke-linecap="round"/>
                 <line x1="3" y1="12" x2="21" y2="12" stroke="#7a7a7a" stroke-width="2.5" stroke-linecap="round"/>
@@ -1088,7 +1134,7 @@
                 <path d="M4 21c0-4.4 3.7-7 8-7s8 2.6 8 7" fill="#7a7a7a"/>
               </svg>
             </div>
-            <div class="icon-button" onclick="showHelper('Cart', 'This is the cart button. Tap here to see the items you want to buy.')">
+            <div class="icon-button">
               <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="9" cy="20" r="1.8" fill="#7a7a7a"/>
                 <circle cx="18" cy="20" r="1.8" fill="#7a7a7a"/>
@@ -1100,7 +1146,7 @@
 
         <div class="search-bar-wrap">
           <input class="search-box" type="text" value="Search techzone.com.au" readonly>
-          <div class="search-icon-box" onclick="showHelper('Search', 'Not quite. This is the search button. Tap here to look for products on the website.')">
+          <div class="search-icon-box">
             <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="10" cy="10" r="6.5" fill="none" stroke="#ffffff" stroke-width="2.5"/>
               <line x1="15" y1="15" x2="21" y2="21" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
@@ -1108,13 +1154,10 @@
           </div>
         </div>
 
-        <div class="welcome-top">Welcome to your account</div>
-
         <div class="welcome-banner">
           <div class="hero hero-centered" style="min-height: 210px; border-radius: 8px;">
             <div class="hero-text">
               <h1 style="font-size: clamp(1.9rem, 3vw, 2.5rem);">Welcome to<br>TechZone</h1>
-              <button class="shop-btn">Shop now</button>
             </div>
             <img src="hero-headphones.png" alt="Headphones product image" onerror="this.style.display='none'">
           </div>
@@ -1151,14 +1194,6 @@
     </section>
   </div>
 
-  <div id="helperPopup" class="helper-popup hidden" aria-hidden="true">
-    <div class="popup-box">
-      <h3 id="helperTitle">Not quite</h3>
-      <p id="helperText">This is the search button.</p>
-      <button class="popup-close" onclick="closeHelper()">OK</button>
-    </div>
-  </div>
-
   <script>
     const pages = [
       document.getElementById('homePage'),
@@ -1174,12 +1209,18 @@
     const historyStack = [0];
     const forwardStack = [];
 
+    const expectedEmail = 'hossein@email.com';
+    const expectedFirstName = 'Hossein';
+    const expectedLastName = 'Ahmadi';
+    const expectedPassword = 'Hossein123';
+
     function renderPage(index) {
       pages.forEach((page, i) => {
         page.classList.toggle('hidden', i !== index);
       });
       currentPage = index;
       updateNavButtons();
+      closeAllPopups();
       window.scrollTo({ top: 0, behavior: 'auto' });
     }
 
@@ -1219,29 +1260,46 @@
       });
     }
 
-    function showHelper(title, text) {
-      document.getElementById('helperTitle').textContent = title || 'Not quite';
-      document.getElementById('helperText').textContent = text;
-      document.getElementById('helperPopup').classList.remove('hidden');
+    function showPopup(id) {
+      const popup = document.getElementById(id);
+      if (popup) popup.classList.add('show');
     }
 
-    function closeHelper() {
-      document.getElementById('helperPopup').classList.add('hidden');
+    function closePopup(id) {
+      const popup = document.getElementById(id);
+      if (popup) popup.classList.remove('show');
+    }
+
+    function closeAllPopups() {
+      document.querySelectorAll('.popup-overlay').forEach(popup => {
+        popup.classList.remove('show');
+      });
     }
 
     function verifyEmailOnly() {
       const email = document.getElementById('email').value.trim();
       const feedback = document.getElementById('emailFeedback');
 
-      if (!email || !email.includes('@') || !email.includes('.')) {
-        feedback.textContent = 'Please enter a valid email address.';
+      if (email === '') {
+        feedback.textContent = 'Please enter the email address.';
         feedback.className = 'feedback error';
         return;
       }
 
-      feedback.textContent = '';
-      feedback.className = 'feedback';
-      goToPage(2);
+      if (email !== expectedEmail) {
+        feedback.textContent = 'That email address is not correct. Please check and try again.';
+        feedback.className = 'feedback error';
+        return;
+      }
+
+      feedback.textContent = 'Email correct.';
+      feedback.className = 'feedback success';
+
+      setTimeout(() => {
+        feedback.textContent = '';
+        feedback.className = 'feedback';
+        goToPage(2);
+      }, 500);
     }
 
     function togglePassword() {
@@ -1255,23 +1313,59 @@
       const password = document.getElementById('password').value.trim();
       const feedback = document.getElementById('formFeedback');
 
-      if (!firstName || !lastName || !password) {
+      if (firstName === '' && lastName === '' && password === '') {
         feedback.textContent = 'Please complete all fields.';
         feedback.className = 'feedback error';
         return;
       }
 
-      if (password.length < 6) {
-        feedback.textContent = 'Password must be at least 6 characters.';
+      if (firstName === '') {
+        feedback.textContent = 'Please enter the first name.';
         feedback.className = 'feedback error';
         return;
       }
 
-      feedback.textContent = '';
-      feedback.className = 'feedback';
+      if (firstName !== expectedFirstName) {
+        feedback.textContent = 'First name is not correct. Please check and try again.';
+        feedback.className = 'feedback error';
+        return;
+      }
+
+      if (lastName === '') {
+        feedback.textContent = 'Please enter the last name.';
+        feedback.className = 'feedback error';
+        return;
+      }
+
+      if (lastName !== expectedLastName) {
+        feedback.textContent = 'Last name is not correct. Please check and try again.';
+        feedback.className = 'feedback error';
+        return;
+      }
+
+      if (password === '') {
+        feedback.textContent = 'Please enter the password.';
+        feedback.className = 'feedback error';
+        return;
+      }
+
+      if (password !== expectedPassword) {
+        feedback.textContent = 'Password is not correct. Please check and try again.';
+        feedback.className = 'feedback error';
+        return;
+      }
+
+      feedback.textContent = 'Details correct.';
+      feedback.className = 'feedback success';
+
       currentCode = generateCode();
       updateDisplayedCode();
-      goToPage(4);
+
+      setTimeout(() => {
+        feedback.textContent = '';
+        feedback.className = 'feedback';
+        goToPage(4);
+      }, 500);
     }
 
     function generateCode() {
@@ -1279,7 +1373,6 @@
     }
 
     function updateDisplayedCode() {
-      document.getElementById('displayCodeInline').textContent = currentCode;
       document.getElementById('displayCodeInlineShort').textContent = currentCode;
     }
 
@@ -1296,27 +1389,30 @@
       const input = document.getElementById('securityCode').value.trim();
       const feedback = document.getElementById('codeFeedback');
 
-      if (input === currentCode) {
-        feedback.textContent = 'Code accepted.';
-        feedback.className = 'feedback success';
-
-        const firstName = document.getElementById('firstName').value.trim() || 'User';
-        document.getElementById('welcomeName').textContent = firstName;
-
-        setTimeout(() => {
-          feedback.textContent = '';
-          feedback.className = 'feedback';
-          goToPage(5);
-        }, 500);
-      } else {
-        feedback.textContent = 'That code is not correct. Please try again.';
+      if (input === '') {
+        feedback.textContent = 'Please enter the security code.';
         feedback.className = 'feedback error';
+        return;
       }
-    }
 
-    document.getElementById('helperPopup').addEventListener('click', function (event) {
-      if (event.target === this) closeHelper();
-    });
+      if (input !== currentCode) {
+        feedback.textContent = 'That security code is not correct. Please try again.';
+        feedback.className = 'feedback error';
+        return;
+      }
+
+      feedback.textContent = 'Code accepted.';
+      feedback.className = 'feedback success';
+
+      const firstName = document.getElementById('firstName').value.trim() || 'User';
+      document.getElementById('welcomeName').textContent = firstName;
+
+      setTimeout(() => {
+        feedback.textContent = '';
+        feedback.className = 'feedback';
+        goToPage(5);
+      }, 500);
+    }
 
     renderPage(0);
   </script>
