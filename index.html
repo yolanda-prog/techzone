@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechZone Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-box {
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      width: 320px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      color: #1f4db8;
+      margin-top: 0;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #1f4db8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #163b8f;
+    }
+
+    #message {
+      margin-top: 16px;
+      font-weight: bold;
+      text-align: center;
+      min-height: 24px;
+    }
+
+    .success {
+      color: #1b7a1b;
+    }
+
+    .error {
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>TechZone</h1>
+
+    <label for="email">Email</label>
+    <input type="text" id="email" placeholder="Enter your email">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter your password">
+
+    <button onclick="checkLogin()">Sign In</button>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    function checkLogin() {
+      const correctEmail = "yan@email.com";
+      const correctPassword = "Tech2025";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const message = document.getElementById("message");
+
+      if (email !== correctEmail) {
+        message.textContent = "Incorrect email. Try again.";
+        message.className = "error";
+      } else if (password !== correctPassword) {
+        message.textContent = "Incorrect password. Try again.";
+        message.className = "error";
+      } else {
+        message.textContent = "Correct! You are now signed in.";
+        message.className = "success";
+
+        setTimeout(() => {
+          window.location.href = "success.html";
+        }, 1500);
+      }
+    }
+  </script>
+</body>
+</html>
