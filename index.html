@@ -179,14 +179,15 @@ display: block;
 
     .search-bar-wrap {
       background: var(--brand-blue);
-      padding: 14px 14px 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      max-width: 1200px;
+      padding: 14px 14px 16px;   
     }
-
+.search-bar-inner {
+  width: min(1200px, calc(100% - 24px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
     .search-box {
       flex: 1;
       background: #fff;
@@ -212,14 +213,17 @@ display: block;
 
     .hero {
       position: relative;
-      width: min(1200px, calc(100% - 24px));
-      margin: 0 auto;
+      width: 100%;
       min-height: 270px;
       background: linear-gradient(90deg, #0052c8 0%, #1677dd 58%, #7fc0f2 100%);
       overflow: hidden;
-      border-radius: 0;
     }
-
+.hero-inner {
+  position: relative;
+  width: min(1200px, calc(100% - 24px));
+  min-height: 270px;
+  margin: 0 auto;
+}
     .hero::before {
       content: "";
       position: absolute;
@@ -277,7 +281,13 @@ display: block;
       padding: 12px 10px 0;
       background: var(--light-grey);
     }
-
+.cards-row-inner {
+  width: min(1200px, calc(100% - 12px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
     .small-card {
       background: #fff;
       border: 1px solid #dddddd;
@@ -314,7 +324,13 @@ display: block;
       padding: 10px 10px 14px;
       background: var(--light-grey);
     }
-
+info-row-inner {
+  width: min(1200px, calc(100% - 12px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
     .info-card {
       background: var(--brand-dark);
       color: #fff;
