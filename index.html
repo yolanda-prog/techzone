@@ -285,21 +285,29 @@ display: block;
     .small-card {
       background: #fff;
       border: 1px solid #dddddd;
-      border-radius: 4px;
-      text-align: center;
-      padding: 12px 8px;
       min-height: 180px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+  padding: 18px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+       font-size: 1.7rem;
+  font-weight: 700;
+  color: #1f1f1f;
+  margin-bottom: 12px;
+  text-align: center;
+  font-family: 'Century Gothic', sans-serif;
     }
 
-    .small-card img {
-      width: 90px;
-      height: 68px;
-      object-fit: contain;
-      margin-bottom: 10px;
+    .small-card-img {
+ flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+       max-width: 78%;
+  max-height: 145px;
+  object-fit: contain;
     }
 
     .small-card p {
@@ -930,19 +938,22 @@ display: block;
           </div>
 
         <div class="cards-row">
-           <div class="cards-row-inner">
+           <div class="small-card-title">Laptops</div>
+  <div class="small-card-image">
+    <img src="laptop.png" alt="Laptop">
+  </div>
+</div>
           <div class="small-card">
-            <img src="laptop.png" alt="Laptop category" onerror="this.style.display='none'">
-            <p>Laptops</p>
-          </div>
+             <div class="small-card-title">Smartphones</div>
+  <div class="small-card-image">
+    <img src="smartphones.png" alt="Smartphone">
+  </div>
+</div>
           <div class="small-card">
-            <img src="smartphones.png" alt="Smartphones category" onerror="this.style.display='none'">
-            <p>Smartphones</p>
-          </div>
-          <div class="small-card">
-            <img src="headphones (4).png" alt="Headphones category" onerror="this.style.display='none'">
-            <p>Headphones</p>
-          </div>
+           <div class="small-card-title">Headphones</div>
+  <div class="small-card-image">
+    <img src="headphones (4).png" alt="Headphones">
+  </div>
              </div>
         </div>
 
@@ -951,8 +962,7 @@ display: block;
 
     <div class="info-card">
       <div class="info-icon">
-        <!-- Add shipping image here later -->
-        <!-- Example: <img src="shipping-icon.png" alt="Shipping"> -->
+         <img src="express-delivery (1).png" alt="Shipping">
       </div>
       <div class="info-text">
         <div class="info-title">Fast Shipping</div>
@@ -962,8 +972,7 @@ display: block;
 
     <div class="info-card">
       <div class="info-icon">
-        <!-- Add returns image here later -->
-        <!-- Example: <img src="returns-icon.png" alt="Returns"> -->
+              <img src="return (1).png" alt="Returns"> 
       </div>
       <div class="info-text">
         <div class="info-title">Easy Returns</div>
@@ -973,8 +982,7 @@ display: block;
 
     <div class="info-card">
       <div class="info-icon">
-        <!-- Add payments image here later -->
-        <!-- Example: <img src="payments-icon.png" alt="Payments"> -->
+     <img src="protection.png" alt="Payments"> 
       </div>
       <div class="info-text">
         <div class="info-title">Secure Payments</div>
