@@ -582,10 +582,14 @@ display: block;
     }
 
     .welcome-banner {
-      padding: 16px 14px 8px;
-      background: var(--light-grey);
-    }
+       background: var(--light-grey);
+  padding: 16px 0 8px;
+}
 
+.welcome-banner-inner {
+  width: min(1200px, calc(100% - 24px));
+  margin: 0 auto;
+}
     .hero-centered .hero-text {
       left: 50%;
       top: 50%;
@@ -595,21 +599,31 @@ display: block;
       text-align: center;
     }
 
-    .popular-title {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: #333;
-      padding: 14px 12px 8px;
-      background: var(--light-grey);
-    }
+  .popular-wrap {
+  background: var(--light-grey);
+  padding: 0 0 14px;
+}
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 0 10px 14px;
-      background: var(--light-grey);
-    }
+.popular-inner {
+  width: min(1200px, calc(100% - 24px));
+  margin: 0 auto;
+}
+
+.popular-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #333;
+  padding: 14px 0 8px;
+  background: transparent;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 0;
+  background: transparent;
+}
 
     .product-card {
       background: #fff;
@@ -1352,24 +1366,29 @@ display: block;
         </div>
 
         <div class="search-bar-wrap">
-          <input class="search-box" type="text" value="Search techzone.com.au" readonly>
+          <div class="search-bar-inner">
+    <input class="search-box" type="text" value="Search techzone.com.au" readonly>
           <div class="search-icon-box">
             <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="10" cy="10" r="6.5" fill="none" stroke="#ffffff" stroke-width="2.5"/>
               <line x1="15" y1="15" x2="21" y2="21" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
+            </div>
           </div>
         </div>
 
         <div class="welcome-banner">
-          <div class="hero hero-centered" style="min-height: 210px; border-radius: 8px;">
+          <div class="welcome-banner-inner">
+    <div class="hero hero-centered" style="min-height: 210px; border-radius: 8px;">
             <div class="hero-text">
               <h1 style="font-size: clamp(1.9rem, 3vw, 2.5rem);">Welcome to<br>TechZone</h1>
             </div>
             <img src="hero-headphones.png" alt="Headphones product image" onerror="this.style.display='none'">
+      </div>
           </div>
         </div>
-
+<div class="popular-wrap">
+  <div class="popular-inner">
         <div class="popular-title">Popular now</div>
         <div class="products-grid">
           <div class="product-card">
@@ -1377,8 +1396,10 @@ display: block;
             <h4>Wireless Headphones</h4>
             <div class="price">$39</div>
           </div>
+           </div>
+  </div>
           <div class="product-card">
-            <img src="smartphone.png" alt="Phone accessory" onerror="this.style.display='none'">
+            <img src="smartphones.png" alt="Phone accessory" onerror="this.style.display='none'">
             <h4>Phone Accessories</h4>
             <div class="price">From $12</div>
           </div>
@@ -1388,7 +1409,7 @@ display: block;
             <div class="price">$499</div>
           </div>
           <div class="product-card">
-            <img src="headphones-small.png" alt="Bluetooth earbuds" onerror="this.style.display='none'">
+            <img src="earbuds.png" alt="Bluetooth earbuds" onerror="this.style.display='none'">
             <h4>Bluetooth Earbuds</h4>
             <div class="price">$29</div>
           </div>
