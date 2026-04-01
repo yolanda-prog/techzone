@@ -282,33 +282,39 @@ display: block;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
-    .small-card {
-      background: #fff;
-      border: 1px solid #dddddd;
-      min-height: 180px;
-  padding: 18px 12px 10px;
+   .small-card {
+  background: #f3f3f3;
+  border: 1px solid #d8d8d8;
+  border-radius: 4px;
+  width: 32%;
+  min-height: 180px;
+  padding: 18px 10px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-       font-size: 1.7rem;
-  font-weight: 700;
-  color: #1f1f1f;
-  margin-bottom: 12px;
-  text-align: center;
-  font-family: 'Century Gothic', sans-serif;
-    }
+}
 
-    .small-card-image {
- flex: 1;
+.small-card-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.small-card-image {
+  flex: 1;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-.small-card-image {
-  max-width: 65%;
-  max-height: 95px;
+}
+
+.small-card-image img {
+  width: auto;
+  max-width: 55%;
+  max-height: 85px;
   object-fit: contain;
+  display: block;
 }
 
     .small-card p {
