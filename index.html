@@ -1410,10 +1410,10 @@ display: block;
     const historyStack = [0];
     const forwardStack = [];
 
-    const expectedEmail = 'hossein@email.com';
+    const expectedEmail = 'hossein.ahmadi89@gmail.com';
     const expectedFirstName = 'Hossein';
     const expectedLastName = 'Ahmadi';
-    const expectedPassword = 'Hossein123';
+    const expectedPassword = 'GreenBus!89';
 
     function renderPage(index) {
       pages.forEach((page, i) => {
@@ -1487,7 +1487,7 @@ display: block;
         return;
       }
 
-      if (email !== expectedEmail) {
+      if (email.toLowerCase() !== expectedEmail.toLowerCase()) {
         feedback.textContent = 'That email address is not correct. Please check and try again.';
         feedback.className = 'feedback error';
         return;
