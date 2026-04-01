@@ -197,7 +197,6 @@ display: block;
       font-size: 1rem;
       color: #555;
       font-family: inherit;
-      width: min(1080px, calc(100vw - 90px))
     }
 
     .search-icon-box {
@@ -273,11 +272,6 @@ display: block;
     }
 
     .cards-row {
-        width: min(1200px, calc(100% - 12px));
-  margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
       padding: 12px 10px 0;
       background: var(--light-grey);
     }
@@ -316,20 +310,15 @@ display: block;
     }
 
     .info-row {
-        width: min(1200px, calc(100% - 12px));
-  margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      padding: 10px 10px 14px;
+      padding: 10px 0 14px;
       background: var(--light-grey);
     }
-info-row-inner {
+.info-row-inner {
   width: min(1200px, calc(100% - 12px));
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
     .info-card {
       background: var(--brand-dark);
@@ -880,6 +869,7 @@ info-row-inner {
         </div>
 
         <div class="search-bar-wrap">
+          <div class="search-bar-inner">
           <input class="search-box" type="text" value="Search techzone.com.au" readonly>
           <div class="search-icon-box" onclick="showPopup('searchPopup')">
             <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
@@ -887,18 +877,23 @@ info-row-inner {
               <line x1="15" y1="15" x2="21" y2="21" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
           </div>
+             </div>
         </div>
 
         <div class="hero">
+          <div class="hero-inner">
           <div class="hero-text">
             <h1>Great deals on<br>headphones!</h1>
             <button class="shop-btn" onclick="showPopup('shopPopup')">Shop Now</button>
+          
           </div>
 
           <img src="home-page-headphones.png" alt="Headphones product image" onerror="this.style.display='none'">
         </div>
+          </div>
 
         <div class="cards-row">
+           <div class="cards-row-inner">
           <div class="small-card">
             <img src="laptop.png" alt="Laptop category" onerror="this.style.display='none'">
             <p>Laptops</p>
@@ -911,6 +906,7 @@ info-row-inner {
             <img src="headphones (4).png" alt="Headphones category" onerror="this.style.display='none'">
             <p>Headphones</p>
           </div>
+             </div>
         </div>
 
         <div class="info-row">
