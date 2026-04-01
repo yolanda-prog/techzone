@@ -1272,9 +1272,11 @@ display: block;
                 <strong>TechZone</strong>
                 <span class="notify-time">now</span>
               </div>
-              <div class="notify-title">  <span>The code to verify your email is </span>
-  <strong>857271</strong>
-  <span>.</span></div>
+             <div class="notify-title">
+  <span>The code to verify your email is </span>
+  <strong id="displayCodeInlineShort">857271</strong>
+  <span>.</span>
+</div>
             </div>
           </div>
         </div>
@@ -1577,9 +1579,12 @@ display: block;
       return String(Math.floor(100000 + Math.random() * 900000));
     }
 
-    function updateDisplayedCode() {
-      document.getElementById('displayCodeInlineShort').textContent = currentCode;
-    }
+  function updateDisplayedCode() {
+  const codeEl = document.getElementById('displayCodeInlineShort');
+  if (codeEl) {
+    codeEl.textContent = currentCode;
+  }
+}
 
     function resendCode() {
       currentCode = generateCode();
