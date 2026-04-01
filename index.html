@@ -469,11 +469,12 @@ display: block;
     }
 
     .feedback {
-      margin-top: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      min-height: 24px;
-      padding: 0 6px;
+  margin-top: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  min-height: 24px;
+  padding: 0 6px;
+  line-height: 1.5;
     }
 
     .error { color: #c62828; }
@@ -1544,65 +1545,49 @@ display: block;
     }
 
     function verifyDetails() {
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName = document.getElementById('lastName').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const feedback = document.getElementById('formFeedback');
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const feedback = document.getElementById('formFeedback');
 
-      if (firstName === '' && lastName === '' && password === '') {
-        feedback.textContent = 'Please complete all fields.';
-        feedback.className = 'feedback error';
-        return;
-      }
+  const messages = [];
 
-      if (firstName === '') {
-        feedback.textContent = 'Please enter the first name.';
-        feedback.className = 'feedback error';
-        return;
-      }
+  if (firstName === '') {
+    messages.push('Please enter the first name.');
+  } else if (firstName !== expectedFirstName) {
+    messages.push('First name is not correct. Please check the capital letter and try again.');
+  }
 
-      if (firstName !== expectedFirstName) {
-        feedback.textContent = 'First name is not correct. Please check and try again.';
-        feedback.className = 'feedback error';
-        return;
-      }
+  if (lastName === '') {
+    messages.push('Please enter the last name.');
+  } else if (lastName !== expectedLastName) {
+    messages.push('Last name is not correct. Please check the capital letter and try again.');
+  }
 
-      if (lastName === '') {
-        feedback.textContent = 'Please enter the last name.';
-        feedback.className = 'feedback error';
-        return;
-      }
+  if (password === '') {
+    messages.push('Please enter the password.');
+  } else if (password !== expectedPassword) {
+    messages.push('Password is not correct. Please check and try again.');
+  }
 
-      if (lastName !== expectedLastName) {
-        feedback.textContent = 'Last name is not correct. Please check and try again.';
-        feedback.className = 'feedback error';
-        return;
-      }
+  if (messages.length > 0) {
+    feedback.innerHTML = messages.join('<br>');
+    feedback.className = 'feedback error';
+    return;
+  }
 
-      if (password === '') {
-        feedback.textContent = 'Please enter the password.';
-        feedback.className = 'feedback error';
-        return;
-      }
+  feedback.textContent = 'Details correct.';
+  feedback.className = 'feedback success';
 
-      if (password !== expectedPassword) {
-        feedback.textContent = 'Password is not correct. Please check and try again.';
-        feedback.className = 'feedback error';
-        return;
-      }
+  currentCode = generateCode();
+  updateDisplayedCode();
 
-      feedback.textContent = 'Details correct.';
-      feedback.className = 'feedback success';
-
-      currentCode = generateCode();
-      updateDisplayedCode();
-
-      setTimeout(() => {
-        feedback.textContent = '';
-        feedback.className = 'feedback';
-        goToPage(4);
-      }, 500);
-    }
+  setTimeout(() => {
+    feedback.textContent = '';
+    feedback.className = 'feedback';
+    goToPage(4);
+  }, 500);
+}
 
     function generateCode() {
       return String(Math.floor(100000 + Math.random() * 900000));
