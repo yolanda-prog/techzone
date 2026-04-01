@@ -321,17 +321,54 @@ display: block;
   gap: 8px;
 }
     .info-card {
-      background: var(--brand-dark);
-      color: #fff;
-      text-align: center;
-      font-size: 0.95rem;
-      line-height: 1.2;
-      padding: 8px 4px;
-      min-height: 44px;
-      border-radius: 2px;
-      font-weight: 700;
+      background: linear-gradient(to right, #1f5fc4, #0f4aa5);
+  color: #fff;
+  border-radius: 2px;
+  min-height: 72px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Century Gothic', sans-serif;
     }
+.info-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.info-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+
+.info-subtitle {
+  font-size: 0.72rem;
+  font-weight: 400;
+  opacity: 0.95;
+  line-height: 1.2;
+}
+    .info-icon {
+  border: 2px dashed rgba(255,255,255,0.35);
+  border-radius: 6px;
+}
     .page-end {
       margin-top: auto;
       background: var(--light-grey);
@@ -910,10 +947,43 @@ display: block;
         </div>
 
         <div class="info-row">
-          <div class="info-card">Fast Shipping</div>
-          <div class="info-card">Easy Returns</div>
-          <div class="info-card">Secure Payments</div>
-        </div>
+  <div class="info-row-inner">
+
+    <div class="info-card">
+      <div class="info-icon">
+        <!-- Add shipping image here later -->
+        <!-- Example: <img src="shipping-icon.png" alt="Shipping"> -->
+      </div>
+      <div class="info-text">
+        <div class="info-title">Fast Shipping</div>
+        <div class="info-subtitle">Quick Delivery to Your Door</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">
+        <!-- Add returns image here later -->
+        <!-- Example: <img src="returns-icon.png" alt="Returns"> -->
+      </div>
+      <div class="info-text">
+        <div class="info-title">Easy Returns</div>
+        <div class="info-subtitle">30-Day Return Policy</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">
+        <!-- Add payments image here later -->
+        <!-- Example: <img src="payments-icon.png" alt="Payments"> -->
+      </div>
+      <div class="info-text">
+        <div class="info-title">Secure Payments</div>
+        <div class="info-subtitle">Safe & Reliable Checkout</div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
         <div class="disclaimer">Mock webpage for classroom use. Not a real business.</div>
 
